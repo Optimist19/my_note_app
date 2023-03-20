@@ -2,7 +2,7 @@
   <div>jghdjgsdfjkjhgvjjhbjmbdh</div>
   <!-- <div>{{displayRoute}}</div> -->
   <!-- <div>{{text.typing}}</div> -->
-  <div>{{arr.type}}</div>
+  <!-- <div>{{arr.type}}</div> -->
   <div>{{arr.d}}</div>
 </template>
 
@@ -21,12 +21,13 @@ export default {
 		const arr = ref(null)
 
 		const {text} = useComposable()
+		console.log("compo", useComposable())
 		console.log("text", text.value)
-
+		
 		arr.value = text.value.find(a => a.id === parseInt(displayRoute))
-
+		
+		console.log(`arr`, arr.value)
 		// const {text} = useComposable()
-		// console.log(text)
 		// const arr = text.value.find(a => a.id === displayRoute)
 
 
