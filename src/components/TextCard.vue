@@ -1,27 +1,21 @@
 <template>
-  <div class="hello">
-   <!-- hello world -->
+  <div>
     <div>
       <div class="h1-bttn">
         <h1>Notes</h1>
-        <button class="open" @click="show">+</button>
+        <button class="open" @click="store.commit('show')">+</button>
       </div>
-      {{ text }}
-      <ContentCard v-for="note in text" :text="text" :id="note.id" :d="note.d" :type="note.type" :key="note.id"/>
-      <!-- <div class="t-m" v-for="note in text" :key="note.id">
-        <div>
-          <p>{{note.type}}</p>
-          <p>{{ note.d }}</p>
-          <p>{{ note.id }}</p>
-        </div>
-      </div> -->
+      <div class="con">
+        <ContentCard v-for="note in store.state.text" :id="note.id" :d="note.d" :type="note.type" :key="note.id"/>
+      </div>
+    
     </div>
-    <div class="bttn-text" v-if="display">
+    <div class="bttn-text" v-if="store.state.display">
       <div>
-        <textarea v-model="typing"></textarea>
+        <textarea v-model="store.state.typing" placeholder="Title of your texts should the first"></textarea>
         <div class="bttns">
-          <button class="add" @click="add">Add</button>
-          <button class="close" @click="notShow">Close</button>
+          <button class="add" @click="store.commit('add')">Add</button>
+          <button class="close" @click="store.commit('notShow')">Close</button>
         </div>
       </div>
     </div>
@@ -30,8 +24,8 @@
 
 <script>
 import ContentCard from "./ContentCard.vue"
-import useComposable from "@/composable/useComposable";
-// import {ref} from "vue"
+import store from "../store/index"
+
 export default {
   name: 'TextCard',
 
@@ -40,51 +34,10 @@ export default {
   },
 
   setup(){
-    const {display, show, notShow, text, add, typing} = useComposable()
-    // const display = ref(true)
-    // const date = new Date();
-
-    // let day = date.getDate();
-    // let month = date.getMonth() + 1;
-    // let year = date.getFullYear();
-    // let currentDate = `${day}-${month}-${year}`
-
-    // const text = ref([])
-    // const typing = ref("")
-    // console.log(typing.value)
-    // const name = ref("")
-    // const d = ref(currentDate)
-
-
-    // function show(){
-    //   display.value = true
-    // }
-
-    // function notShow(){
-    //   display.value = false
-    // }
-
-    // function add(){
-    //     text.value.push({
-    //     id: Math.floor(Math.random() * 1000000),
-    //     type: typing.value,
-    //     d: currentDate
-      
-    //   })
-    //   display.value = false
-    //   typing.value = ""
-
-    // }
+    // console.log(store)
 
     return{
-      display,
-      show,
-      notShow,
-      // d,
-      text,
-      add,
-      // name,
-      typing
+      store
     }
   }
 }
@@ -92,50 +45,38 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-.hello{
-  height: 100vh;
-  width: 100vw;
-  background-color: aquamarine;
-}
 .h1-bttn{
   width: 100%;
-  /* height: 40vh; */
-  /* background: rgba(0, 0, 255, 0.1); */
-  /* display: flex; */
-  /* justify-content: space-around; */
-  /* align-items: center; */
-  /* position: absolute; */
   max-width: 70vw;
-  /* padding: 10px; */
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  
 }
 
-/* .t-m{
-  width: 15vw;
-  border: 1px solid red;
-  height: 24vh
-} */
 
 h1{
   font-size: 32px;
   font-weight: bold;
-  /* margin: 0; */
 }
 
 .open{
   font-size: 40px;
 }
 
+.con{
+  margin-top: 6vh;
+  display: flex;
+  justify-content: center;
+  row-gap: 20px;
+  column-gap: 10px;
+  flex-wrap: wrap;
+}
+
 .bttn-text{
   width: 50vw;
-   /* height: 50vh; */
-  border: 1px solid red;
-  /* top: 40vh;
-  position: absolute */
+  border: 1px solid brown;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -152,7 +93,13 @@ h1{
   position: relative;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* justify-content: center; */
+}
+
+@media only screen and (max-width: 600px) {
+  .con{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>

@@ -11,9 +11,9 @@ export default function useComposable(){
 
     const text = ref([])
     const typing = ref("")
-    // console.log(typing.value)
-    // const name = ref("")
-    // const d = ref(currentDate)
+
+    text.value = localStorage.getItem('text')
+
 
 
     function show(){
@@ -23,18 +23,22 @@ export default function useComposable(){
     function notShow(){
       display.value = false
     }
-
+    
     function add(){
         text.value.push({
         id: Math.floor(Math.random() * 1000000),
         type: typing.value,
         d: currentDate
-      
+        
       })
+      text.value = localStorage.setItem('text', JSON.stringify(text))
+      // console.log(JSON.parse(localStorage.getItem("text.value")))
+      // console.log(text.value)
       display.value = false
       typing.value = ""
 
     }
+
 
 	return{
 		display,
@@ -44,7 +48,8 @@ export default function useComposable(){
 		text,
 		add,
 		// name,
-		typing
+		typing,
+    // storage
 	}
 
 

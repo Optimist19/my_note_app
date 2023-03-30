@@ -1,14 +1,12 @@
 <template>
-  <div>jghdjgsdfjkjhgvjjhbjmbdh</div>
-  <!-- <div>{{displayRoute}}</div> -->
-  <!-- <div>{{text.typing}}</div> -->
-  <!-- <div>{{arr.type}}</div> -->
-  <div>{{arr.d}}</div>
+	<div>
+		<p>{{arr.type}}</p>
+		<p>{{arr.d}}</p>
+	</div>
 </template>
 
 <script>
-
-import useComposable from "../composable/useComposable";
+import store from "../store/index"
 import {useRoute} from "vue-router"
 import {ref} from "vue"
 
@@ -20,27 +18,37 @@ export default {
 		const displayRoute = route.params.id
 		const arr = ref(null)
 
-		const {text} = useComposable()
-		console.log("compo", useComposable())
-		console.log("text", text.value)
 		
-		arr.value = text.value.find(a => a.id === parseInt(displayRoute))
-		
-		console.log(`arr`, arr.value)
-		// const {text} = useComposable()
-		// const arr = text.value.find(a => a.id === displayRoute)
-
-
+		arr.value = store.state.text.find(a => a.id === parseInt(displayRoute))
 		
 		return{
-			text,
 			displayRoute,
-			arr
+			arr,
+			store
 		}
 	}
 }
 </script>
 
-<style>
+<style scoped>
+
+p{
+  margin-top: 1vh;
+  font-family: 'Saira', sans-serif;
+}
+
+p:first-child{
+  font-size: 22px;
+  text-align: justify;
+  margin: 0 2vw;
+}
+
+
+p:last-child{
+  text-align: center;
+  font-size: 18px;
+  margin-top: 5vh;
+}
+
 
 </style>
