@@ -12,7 +12,7 @@
     </div>
     <div class="bttn-text" v-if="store.state.display">
       <div>
-        <textarea v-model="store.state.typing" placeholder="Title of your texts should the first"></textarea>
+        <textarea v-model="store.state.typing" placeholder="Title of your message should be the first, then the body of your message can be in the second paragraph"></textarea>
         <div class="bttns">
           <button class="add" @click="store.commit('add')">Add</button>
           <button class="close" @click="store.commit('notShow')">Close</button>

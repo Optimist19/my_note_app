@@ -1,5 +1,5 @@
 # note-app
-
+https://note-take-in-app.netlify.app/
 ## Project setup
 ```
 npm install
