@@ -36,10 +36,9 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 .t-m{
-  width: 15vw;
-  border: 1px solid red;
+  width: 25vw;
   height: 24vh;
   background-color: rgba(180, 231, 255, 0.192);
   overflow: auto;
@@ -67,11 +66,6 @@ a{
 }
 
 @media only screen and (max-width: 600px) {
-  .con{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 
   .t-m{
     width: 20vw;
